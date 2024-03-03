@@ -1,45 +1,54 @@
 package ru.netology.gutuev;
 
+import java.util.Scanner;
+
 public class Customer {
-    private int customerId;
+//    private static int customerId;
     private String customerName;
     private int customerAge;
     private double amountCustomerTransactionPerMonth;
+    Customer[] customerData = new Customer[10];
 
     // Инициализация конструктора класса
-    public Customer(int customerId, String customerName, int customerAge, double amountCustomerTransactionPerMonth){
-        setCustomerId(customerId);
-        setCustomerName(customerName);
-        setCustomerAge(customerAge);
-        setAmountCustomerTransactionPerMonth(amountCustomerTransactionPerMonth);
+    public Customer() {
+
     }
 
     // Инициализация сеттеров
-    public void setCustomerId(int customerId){
-    this.customerId = customerId;
+//    private void setCustomerId(int customerId) {
+//        this.customerId = customerId;
+//    }
+    private void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
-    public void setCustomerName(String customerName){
-    this.customerName = customerName;
+    private void setCustomerAge(int customerAge) {
+        this.customerAge = customerAge;
     }
-    public void setCustomerAge(int customerAge){
-    this.customerAge = customerAge;
-    }
-    public void setAmountCustomerTransactionPerMonth(double amountCustomerTransactionPerMonth){
-    this.amountCustomerTransactionPerMonth = amountCustomerTransactionPerMonth;
+    private void setAmountCustomerTransactionPerMonth(double amountCustomerTransactionPerMonth) {
+        this.amountCustomerTransactionPerMonth = amountCustomerTransactionPerMonth;
     }
 
     // Инициализация геттеров
-    public int getCustomerId(){
-        return customerId;
-    }
-    public String getCustomerName(){
+//    public static int getCustomerId() {
+//        return customerId;
+//    }
+    public String getCustomerName() {
         return customerName;
     }
-    public int getCustomerAge(){
+    public int getCustomerAge() {
         return customerAge;
     }
-    public double getAmountCustomerTransactionPerMonth(){
+    public double getAmountCustomerTransactionPerMonth() {
         return amountCustomerTransactionPerMonth;
     }
 
+    public void customerRegistration() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Создайте клиента:");
+        System.out.println("________________");
+        System.out.println("Введите имя клиента");
+        setCustomerName(scanner.nextLine());
+        System.out.println("Введите возраст клиента");
+        setCustomerAge(scanner.nextInt());
+    }
 }
