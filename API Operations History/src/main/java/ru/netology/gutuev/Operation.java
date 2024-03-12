@@ -1,8 +1,5 @@
 package ru.netology.gutuev;
 
-import org.w3c.dom.ls.LSOutput;
-
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +13,7 @@ public class Operation {
     private double transactionSum;
 
     public Operation(){
-        transaction_data();
+
     }
 
     private void setDate(String dateScan) {
@@ -52,7 +49,7 @@ public class Operation {
 //        return "Дата: [" + date + "]" + " ID пользователя: [" + customerId + "]" + " Сумма транзакции [" + transactionSum + "]";
 //    }
 
-    private void transaction_data() {
+    public void transaction_data() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введи дату транзакции:");
         setDate(scanner.nextLine());
