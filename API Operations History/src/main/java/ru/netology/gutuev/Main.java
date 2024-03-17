@@ -7,15 +7,11 @@ public class Main {
     private static Customer[] customers;
     private static int[][] statement;
     public static int input;
-    private static int rowNumber;
 
     public static void main(String[] args) {
-//        Operation[] operations = new Operation[2];
-//        Customer[] customers = new Customer[2];
-//        int[][] statement = new int[2][2];
         operations = new Operation[2];
         customers = new Customer[2];
-        statement = new int[2][2];
+        statement = new int[2][];
 
         while(true){
             menu();
@@ -30,35 +26,28 @@ public class Main {
                     } break;
                 }
             } else if(input == 2) {
+                // МОЖНО СМЕНИТЬ ЦИКЛЫ НА СЧЁТЧИК И ОБРАЩЕНИЕ К ИНДЕКСУ МАССИВА ПО ЗНАЧЕНИЮ СЧЁТЧИКА
                 for (int i = 0; i < operations.length; i++) {
                     if (operations[i] == null) {
                         operations[i] = new Operation();
                         operations[i].transaction_data();       // вызываем метод создания транзакции
-                        int clientId = operations[i].getCustomerId();      // получаем id клиента, чтобы положить в индекс массива statement
-                        for (int n = 0; i < operations.length; n++){
-                            if (statement[clientId][n] == 0) {
-                                statement[clientId][n] = i;
-                            } else {
-                                continue;
-                            } break;
+                        int clientId = operations[i].getClientId();      // получаем id клиента, чтобы положить в индекс массива statement
+                        for (int j = 1; j<operations.length; j++){
+                            if (statement[clientId] == null) {
+                                statement[clientId] = new int[operations.length];
+                                statement[clientId][0] = i;
+                            } else if (statement[clientId][j] == 0) {
+                                statement[clientId][j] = i;
+                            }
                         }
                     } else {
                         continue;
                     } break;        // Завершает цикл for когда ввели данные по operations[i]
                 }
             } else {
-                System.out.println(Arrays.toString(statement));
+                getOperations(0);
             }
         }
-//        for (int i = 0; i < operations.length; i++) {
-//            operations[i].print();
-//        }
-//        for (int i = 0; i < operations.length; i++){
-//            for (int x = 0; x < customers.length; x++){
-//                statement[i][x] = operations[i].getCustomerId();        // i - id клиента из массива customers, x - порядковый номер операции клиента из массива operations
-//            }
-//        }
-
     }
     public static void menu() {
         System.out.println("___Меню___");
@@ -69,13 +58,16 @@ public class Main {
         input = scanner.nextInt();
     }
 
-    public static int customerTest(){
-        for (int i = 0; i < operations.length; i++){
-            int x = operations[i].getCustomerId();
-//            if (statement[clientId][i] == 0) {
-//
-//            }
+    public static Operation[] getOperations(int clientId) {
+        int[] operationId = new int[statement[clientId].length];
+        for (int i = 0; i<statement[clientId].length; i++) {
+            operationId[i] = statement[clientId][i];
         }
-        return rowNumber;
+        Operation[] clientOperations = new Operation[statement[clientId].length];
+        for (int i = 0; i<clientOperations.length; i++){
+            clientOperations[i] = operations[operationId[i]];
+        }
+        System.out.println(Arrays.deepToString(clientOperations));
+        return clientOperations;
     }
 }
