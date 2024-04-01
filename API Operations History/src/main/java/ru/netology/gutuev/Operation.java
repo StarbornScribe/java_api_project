@@ -12,7 +12,7 @@ public class Operation {
     private int clientId;
     private double transactionSum;
 
-    public Operation(){
+    public Operation() {
 
     }
 
@@ -20,7 +20,7 @@ public class Operation {
         LocalDate date = LocalDate.parse(dateScan, DateTimeFormatter.ofPattern("yyyy.MM.dd"));
         this.date = date;
     }
-    private void setClientId(int clientId){
+    private void setClientId(int clientId) {
 //        if (customerId != Customer.getCustomerId()){
 //            throw new IllegalArgumentException("Пользователь с ID:" + customerId + " не существует!" + " Создайте нового пользователя...");
 //        }
@@ -30,19 +30,19 @@ public class Operation {
         this.transactionSum = transactionSum;
     }
 
-    public LocalDate getDate(){
+    public LocalDate getDate() {
         return date;
     }
-    public int getClientId(){
+    public int getClientId() {
         return clientId;
     }
-    public double getTransactionSum(){
+    public double getTransactionSum() {
         return transactionSum;
     }
 
     // Метод вывода информации о транзакции в консоль
     public void print() {
-        System.out.println("Дата: [" + date + "]" + " ID пользователя: [" + clientId + "]" + " Сумма транзакции [" + transactionSum + ']');
+        System.out.println("Дата: [" + getDate() + "]" + " ID пользователя: [" + getClientId() + "]" + " Сумма транзакции [" + getTransactionSum() + ']');
     }
 
     public void transaction_data() {
@@ -55,5 +55,9 @@ public class Operation {
 
         System.out.println("Введите сумму транзакции:");
         setTransaction_sum(scanner.nextDouble());
+
+        if (getClientId() > Main.arraysLength) {
+            throw new CustomerOperationOutOfBoundException(getClientId(), Main.transactions_counter);
+        }
     }
 }
